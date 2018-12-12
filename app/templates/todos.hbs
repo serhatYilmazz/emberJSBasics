@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        To-Do
+      </div>
+      <ul class="list-group">
+        {{#each model as |todo|}}
+          {{to-do todo=todo sero=(route-action "handleLogout")}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    {{outlet}}
+  </div>
+</div>

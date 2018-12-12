@@ -1,0 +1,8 @@
+<li class="list-group-item">
+  {{input type="checkbox" checked=todo.isDone onclick=(action "toggleChecked") }}
+  <button class="btn btn-warning {{unless todo.isDone "disabled"}}">Serhat</button>
+  <a
+    style="cursor: pointer;"
+    class="{{if todo.isDone "isDone"}}"
+    {{action "logOut"}}>{{todo.name}} </a>
+</li>
