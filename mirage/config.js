@@ -3,7 +3,7 @@ export default function () {
 
 
   let todos = [{
-    type: 'todos',
+    type: 'todo',
     id: 1,
     attributes: {
       name: 'Take it easy',
@@ -11,7 +11,7 @@ export default function () {
     }
   },
     {
-      type: 'todos',
+      type: 'todo',
       id: 2,
       attributes: {
         name: 'Now Way!!',
@@ -26,5 +26,9 @@ export default function () {
   this.get('/todos/:todo_id', function (db, request) {
     // alert(request.params.todo_id);
     return {data: todos.find((todo) => parseInt(request.params.todo_id) === parseInt(todo.id))};
+  });
+  
+  this.delete('/todos/:todo_id', function (db, request) {
+    return {data: 'successful'};
   })
 }

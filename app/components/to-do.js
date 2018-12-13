@@ -7,7 +7,11 @@ export default Component.extend({
       this.toggleProperty('todo.isDone');
     },
     logOut() {
-      this.get('sero')(this.todo.id);
+      this.get('sero')({todoId: this.todo.id, type: 'redirect'});
+    },
+    deleteTodo() {
+      console.log('to-do component');
+      this.get('sero')({todoId: this.todo.id, type: 'delete'});
     }
   }
 });

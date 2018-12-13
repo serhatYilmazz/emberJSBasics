@@ -1,8 +1,7 @@
 <li class="list-group-item">
-  {{input type="checkbox" checked=todo.isDone onclick=(action "toggleChecked") }}
-  <button class="btn btn-warning {{unless todo.isDone "disabled"}}">Serhat</button>
-  <a
-    style="cursor: pointer;"
-    class="{{if todo.isDone "isDone"}}"
-    {{action "logOut"}}>{{todo.name}} </a>
+ {{checkbox-component checked=todo.isDone onUpdate=(action "toggleChecked") classNames="check"}}
+  <a style="cursor: pointer;"
+    class="{{if todo.isDone "isDone"}}" {{action "logOut"}}>{{todo.name}} </a>
+  <button class="btn btn-danger {{unless todo.isDone "disabled"}} pull-right" {{action "deleteTodo" todo.id}} >Delete</button>
 </li>
+
