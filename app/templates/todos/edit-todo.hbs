@@ -1,3 +1,7 @@
 {{#with model as |todo|}}
-  {{todo.name}}
+  <div class="col-xs-6">
+  {{input value=(mut (get todo factName)) type="text" classNames="form-control"}}
+  </div>
+  <button {{action (action (mut factName)) "attributes.name"}} class="btn btn-default">Show name</button>
+  <button {{action (action (mut factName)) "id"}} class="btn btn-default">Show id</button>
 {{/with}}

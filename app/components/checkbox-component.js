@@ -7,7 +7,7 @@ export default Component.extend({
   type: 'checkbox',
   change: observer('checkbox', function () {
     if(this.get('onUpdate')) {
-      this.get('onUpdate')(this.get('checked'));
+      this.get('onUpdate')();
     }
   })
 });

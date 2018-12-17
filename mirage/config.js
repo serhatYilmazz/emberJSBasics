@@ -19,7 +19,7 @@ export default function () {
       }
     }];
 
-  this.get('/todos', function (db, request) {
+  let get = this.get('/todos', function (db, request) {
     return {data: todos};
   });
 
@@ -29,6 +29,11 @@ export default function () {
   });
   
   this.delete('/todos/:todo_id', function (db, request) {
-    return {data: 'successful'};
+    console.log(request);
+    return get();
+  })
+
+  this.post('/todos/addData', function (db, request) {
+
   })
 }

@@ -1,42 +1,40 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
+  todos: service('todos'),
   lastIndex: 0,
   isEditMode: false,
+  init() {
+    this._super(...arguments);
+    let size = this.todos.size();
+    this.set('lastIndex', size);
+  },
   model() {
-    return this.store.findAll('todo').then((results) => {
-      results.forEach(data => {
-        this.lastIndex++;
-      })
-      return results;
-    });
+    return this.todos.todoList;
   },
   actions: {
     handleLogout(param) {
       if (param.type === 'redirect') {
-        this.transitionTo(`todos.edit-todo`, param);
-      } else if (param.type === 'delete') {
+        this.transitionTo(`todos.edit-todo`, param.todoId);
+      }
+      else if (param.type === 'delete') {
         this.delete(param.todoId);
       }
     },
     addTodo(newTodo) {
-      console.log('FROM ROUTE' + newTodo);
-      this.store.push({
-        data: [{
-          id: ++this.lastIndex,
-          type: 'todo',
-          attributes: {
-            "name": newTodo,
-            "is-done": false
-          }
-        }]
+      this.todos.add({
+        id: ++this.lastIndex,
+        type: 'todo',
+        attributes: {
+          "name": newTodo,
+          "is-done": false
+        }
       });
     },
   },
-  delete(id) {
-    console.log('route');
-    this.store.findRecord('todo', id).then((post) => {
-      post.destroyRecord();
-    });
+  delete(object) {
+    this.todos.deleteByObject(object);
+    this.transitionTo('todos');
   }
 });
